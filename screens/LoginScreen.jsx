@@ -1,12 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import AuthContent from "../components/AuthContent";
 
 export default function LoginScreen() {
-  return (
-    <View>
-      <Text>LoginScreen</Text>
-    </View>
-  )
+  return <AuthContent isLogin/>;
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
