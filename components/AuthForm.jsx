@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Input from "./Input";
+import Button from "./Button";
 
 export default function AuthForm({ isLogin }) {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -32,6 +33,11 @@ export default function AuthForm({ isLogin }) {
         onUpdateValue={updateInput.bind(this, "password")}
         value={enteredPassword}
       />
+      <View>
+        <Button>
+          {isLogin ? "Login" : "Register"}
+        </Button>
+      </View>
     </View>
   );
 }
