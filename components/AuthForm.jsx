@@ -33,7 +33,7 @@ export default function AuthForm({ isLogin }) {
         onUpdateValue={updateInput.bind(this, "password")}
         value={enteredPassword}
       />
-      <View>
+      <View style={styles.buttons}>
         <Button>
           {isLogin ? "Login" : "Register"}
         </Button>
@@ -42,4 +42,8 @@ export default function AuthForm({ isLogin }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  buttons:{
+    marginTop:10
+  }
+});
