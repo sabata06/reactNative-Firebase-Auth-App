@@ -2,13 +2,24 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import AuthForm from './AuthForm'
 import ButtonWhite from './ButtonWhite'
+import {useNavigation} from "@react-navigation/native"
 
 export default function AuthContent({isLogin}) {
+  const navigation = useNavigation()
+
+const switchScreen = () =>{
+  if(isLogin){
+    navigation.navigate("Signup")
+  }else{
+    navigation.navigate("Login")
+  }
+}
+
   return (
     <View style={styles.container} >
         <AuthForm isLogin={isLogin}/>
         <View>
-            <ButtonWhite>
+            <ButtonWhite onPress={switchScreen} >
                 {isLogin ? "Create New User" : "Sign In"}
             </ButtonWhite>
         </View>
