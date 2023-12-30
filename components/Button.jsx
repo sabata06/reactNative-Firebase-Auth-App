@@ -1,9 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function Button({ children }) {
+export default function Button({ children, onPress }) {
   return (
     <Pressable
+      onPress={onPress}
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
     >
       <View>
@@ -16,17 +17,16 @@ export default function Button({ children }) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "green",
-    paddingVertical:10,
-    borderRadius:20,
+    paddingVertical: 10,
+    borderRadius: 20,
   },
   pressed: {
     opacity: 0.5,
   },
-  text:{
-    textAlign:"center",
-    color:"white",
-    fontWeight:"bold",
-    fontSize:16
-
-  }
+  text: {
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
 });

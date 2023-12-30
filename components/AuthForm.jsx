@@ -3,11 +3,21 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 
-export default function AuthForm({ isLogin }) {
+export default function AuthForm({ isLogin, onSubmit }) {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfirmEmail, setEnteredConfirmEmail] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
+
+  function submitHandler(){
+    onSubmit({
+      email:enteredEmail,
+      confirmEmail:enteredConfirmEmail,
+      password:enteredPassword,
+      confirmPassword:enteredConfirmPassword
+
+    })
+  }
 
   function updateInput(inputType, enteredValue) {
     switch (inputType) {
@@ -56,7 +66,7 @@ export default function AuthForm({ isLogin }) {
         />
       )}
       <View style={styles.buttons}>
-        <Button>{isLogin ? "Login" : "Register"}</Button>
+        <Button onPress={submitHandler} >{isLogin ? "Login" : "Register"}</Button>
       </View>
     </View>
   );
