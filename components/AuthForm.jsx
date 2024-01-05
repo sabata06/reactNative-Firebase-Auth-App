@@ -3,20 +3,27 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 
-export default function AuthForm({ isLogin, onSubmit }) {
+export default function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfirmEmail, setEnteredConfirmEmail] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
 
-  function submitHandler(){
-    onSubmit({
-      email:enteredEmail,
-      confirmEmail:enteredConfirmEmail,
-      password:enteredPassword,
-      confirmPassword:enteredConfirmPassword
+  const {
+    email: emailIsInvalid,
+    confirmEmail: emailsDontMatch,
+    password: passwordIsInvalid,
+    confirmPassword: passwordDontMatch,
+  } = credentialsInvalid;
 
-    })
+  console.log(credentialsInvalid);
+  function submitHandler() {
+    onSubmit({
+      email: enteredEmail,
+      confirmEmail: enteredConfirmEmail,
+      password: enteredPassword,
+      confirmPassword: enteredConfirmPassword,
+    });
   }
 
   function updateInput(inputType, enteredValue) {
@@ -43,6 +50,7 @@ export default function AuthForm({ isLogin, onSubmit }) {
         keyboardType="email-adress"
         onUpdateValue={updateInput.bind(this, "email")}
         value={enteredEmail}
+        isInvalid={emailIsInvalid}
       />
       {!isLogin && (
         <Input
@@ -50,6 +58,7 @@ export default function AuthForm({ isLogin, onSubmit }) {
           keyboardType="email-adress"
           onUpdateValue={updateInput.bind(this, "confirmEmail")}
           value={enteredConfirmEmail}
+          isInvalid={emailsDontMatch}
         />
       )}
       <Input
@@ -57,16 +66,20 @@ export default function AuthForm({ isLogin, onSubmit }) {
         secure
         onUpdateValue={updateInput.bind(this, "password")}
         value={enteredPassword}
+        isInvalid={passwordIsInvalid}
       />
       {!isLogin && (
         <Input
           label="Confirm Password"
           onUpdateValue={updateInput.bind(this, "confirmPassword")}
           value={enteredConfirmPassword}
+          isInvalid={passwordDontMatch}
         />
       )}
       <View style={styles.buttons}>
-        <Button onPress={submitHandler} >{isLogin ? "Login" : "Register"}</Button>
+        <Button onPress={submitHandler}>
+          {isLogin ? "Login" : "Register"}
+        </Button>
       </View>
     </View>
   );
