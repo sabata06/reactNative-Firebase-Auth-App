@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
@@ -39,6 +40,7 @@ function NormalStack() {
   );
 }
 function AfterAuthStack() {
+  const authContext = useContext(AuthContext);
   return (
     <Stack.Navigator
       screenOptions={{
@@ -54,29 +56,31 @@ function AfterAuthStack() {
         component={HomeScreen}
         options={{
           headerTitle: "Home",
+          headerRight: () => (
+            <Pressable onPress={authContext.logOut}>
+              <SimpleLineIcons name="logout" size={24} color="white" />
+            </Pressable>
+          ),
         }}
       />
     </Stack.Navigator>
   );
 }
 
-function Navigation(){
-  const authContext =  useContext(AuthContext)
-  return(
+function Navigation() {
+  const authContext = useContext(AuthContext);
+  return (
     <NavigationContainer>
-
-      {!authContext.isAuthenticate &&  <NormalStack /> }
-      {authContext.isAuthenticate &&  <AfterAuthStack /> }
-       
-      </NavigationContainer>
-  )
-
+      {!authContext.isAuthenticate && <NormalStack />}
+      {authContext.isAuthenticate && <AfterAuthStack />}
+    </NavigationContainer>
+  );
 }
 
 export default function App() {
   return (
     <AuthContextProvider>
-      <Navigation/>
+      <Navigation />
     </AuthContextProvider>
   );
 }
