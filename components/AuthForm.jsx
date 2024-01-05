@@ -63,7 +63,7 @@ export default function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
       )}
       <Input
         label="Password"
-        secure
+        // secure
         onUpdateValue={updateInput.bind(this, "password")}
         value={enteredPassword}
         isInvalid={passwordIsInvalid}
@@ -74,6 +74,7 @@ export default function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           onUpdateValue={updateInput.bind(this, "confirmPassword")}
           value={enteredConfirmPassword}
           isInvalid={passwordDontMatch}
+          // secure
         />
       )}
       <View style={styles.buttons}>

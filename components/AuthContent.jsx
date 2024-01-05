@@ -4,7 +4,7 @@ import AuthForm from "./AuthForm";
 import ButtonWhite from "./ButtonWhite";
 import { useNavigation } from "@react-navigation/native";
 
-export default function AuthContent({ isLogin }) {
+export default function AuthContent({ isLogin, onAuthanticate }) {
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
     password: false,
@@ -35,10 +35,12 @@ export default function AuthContent({ isLogin }) {
         email: !emailIsValid,
         confirmEmail: !emailIsValid || !emailsAreEqual,
         password: !passwordIsValid,
-        confirmPassword: !passwordIsValid || !passwordsAreEqual
-      })
+        confirmPassword: !passwordIsValid || !passwordsAreEqual,
+      });
       return;
     }
+
+    onAuthanticate({email, password})
   }
 
   const switchScreen = () => {
@@ -51,7 +53,11 @@ export default function AuthContent({ isLogin }) {
 
   return (
     <View style={styles.container}>
-      <AuthForm onSubmit={submitHandler} isLogin={isLogin} credentialsInvalid={credentialsInvalid} />
+      <AuthForm
+        onSubmit={submitHandler}
+        isLogin={isLogin}
+        credentialsInvalid={credentialsInvalid}
+      />
       <View>
         <ButtonWhite onPress={switchScreen}>
           {isLogin ? "Create New User" : "Sign In"}
